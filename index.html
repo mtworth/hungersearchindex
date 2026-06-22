@@ -456,13 +456,12 @@ footer {
       <div class="yoy-legend-line"></div>
       <span>Prior year</span>
     </div>
-    <span class="grid-controls-label">Window</span>
-    <div class="pill-group" id="windowPills">
-      <button class="pill" data-w="4">4W</button>
-      <button class="pill" data-w="13">13W</button>
-      <button class="pill active" data-w="26">26W</button>
-      <button class="pill" data-w="0">All</button>
+    <div class="pill-group" id="resPills">
+      <button class="pill active" data-res="monthly">Monthly</button>
+      <button class="pill" data-res="weekly">Weekly</button>
     </div>
+    <span class="grid-controls-label">Window</span>
+    <div class="pill-group" id="windowPills"></div>
     <button class="smooth-toggle active" id="smoothBtn">
       <span class="dot"></span>Smooth
     </button>
@@ -482,7 +481,7 @@ footer {
 <div id="sparkTip"></div>
 
 <script>
-const DATA = {"weeks":["2023-12-31","2024-01-07","2024-01-14","2024-01-21","2024-01-28","2024-02-04","2024-02-11","2024-02-18","2024-02-25","2024-03-03","2024-03-10","2024-03-17","2024-03-24","2024-03-31","2024-04-07","2024-04-14","2024-04-21","2024-04-28","2024-05-05","2024-05-12","2024-05-19","2024-05-26","2024-06-02","2024-06-09","2024-06-16","2024-06-23","2024-06-30","2024-07-07","2024-07-14","2024-07-21","2024-07-28","2024-08-04","2024-08-11","2024-08-18","2024-08-25","2024-09-01","2024-09-08","2024-09-15","2024-09-22","2024-09-29","2024-10-06","2024-10-13","2024-10-20","2024-10-27","2024-11-03","2024-11-10","2024-11-17","2024-11-24","2024-12-01","2024-12-08","2024-12-15","2024-12-22","2024-12-29","2025-01-05","2025-01-12","2025-01-19","2025-01-26","2025-02-02","2025-02-09","2025-02-16","2025-02-23","2025-03-02","2025-03-09","2025-03-16","2025-03-23","2025-03-30","2025-04-06","2025-04-13","2025-04-20","2025-04-27","2025-05-04","2025-05-11","2025-05-18","2025-05-25","2025-06-01","2025-06-08","2025-06-15","2025-06-22","2025-06-29","2025-07-06","2025-07-13","2025-07-20","2025-07-27","2025-08-03","2025-08-10","2025-08-17","2025-08-24","2025-08-31","2025-09-07","2025-09-14","2025-09-21","2025-09-28","2025-10-05","2025-10-12","2025-10-19","2025-10-26","2025-11-02","2025-11-09","2025-11-16","2025-11-23","2025-11-30","2025-12-07","2025-12-14","2025-12-21","2025-12-28","2026-01-04","2026-01-11","2026-01-18","2026-01-25","2026-02-01","2026-02-08","2026-02-15","2026-02-22","2026-03-01","2026-03-08","2026-03-15","2026-03-22","2026-03-29","2026-04-05","2026-04-12","2026-04-19","2026-04-26","2026-05-03","2026-05-10","2026-05-17","2026-05-24","2026-05-31","2026-06-07","2026-06-14"],"dmas":[{"code":"807","label":"SF Bay Area","cx":60.0,"cy":178.1,"total":2390000,"max":59000,"peak":"2025-11-02","yoy":13.4,"vals":[19000,16000,15000,17000,15000,14000,14000,13000,16000,13000,18000,15000,16000,14000,14000,12000,15000,16000,14000,12000,16000,12000,13000,16000,14000,13000,13000,13000,15000,12000,14000,11000,13000,15000,14000,14000,13000,14000,14000,14000,15000,12000,12000,14000,17000,18000,20000,19000,18000,15000,19000,16000,18000,15000,15000,14000,14000,15000,13000,12000,13000,14000,15000,12000,13000,14000,14000,12000,13000,13000,13000,12000,12000,12000,14000,14000,14000,12000,11000,16000,15000,18000,20000,32000,19000,12000,14000,12000,13000,15000,15000,17000,14000,14000,27000,55000,59000,31000,30000,29000,30000,27000,27000,26000,24000,23000,22000,24000,27000,26000,23000,23000,29000,29000,25000,27000,29000,32000,33000,34000,29000,29000,28000,31000,34000,31000,32000,16000,14000]},{"code":"862","label":"Sacramento","cx":86.8,"cy":144.0,"total":2575000,"max":70000,"peak":"2025-11-02","yoy":8.1,"vals":[18000,18000,18000,22000,22000,16000,15000,20000,19000,15000,16000,15000,16000,19000,17000,13000,17000,18000,13000,16000,18000,19000,16000,17000,21000,19000,19000,18000,16000,17000,19000,14000,17000,15000,23000,21000,18000,22000,21000,21000,18000,18000,20000,19000,21000,22000,31000,28000,17000,18000,18000,13000,16000,17000,19000,19000,18000,14000,11000,19000,15000,16000,16000,17000,19000,20000,15000,19000,15000,19000,15000,15000,16000,16000,15000,18000,18000,21000,17000,16000,19000,21000,21000,15000,14000,15000,19000,15000,16000,17000,17000,18000,20000,15000,34000,69000,70000,40000,34000,25000,24000,26000,21000,17000,16000,20000,19000,21000,21000,20000,17000,24000,25000,25000,22000,23000,24000,25000,26000,24000,22000,24000,24000,21000,25000,23000,25000,12000,17000]},{"code":"803","label":"Los Angeles","cx":180.6,"cy":334.7,"total":1425300,"max":39000,"peak":"2025-11-02","yoy":26.8,"vals":[6700,8500,7700,7400,7800,7100,7800,8300,7700,7800,6800,6100,7500,7600,7300,6500,7500,7900,6500,7100,7300,7400,7500,6600,8100,8300,6500,6600,8500,7100,7300,7000,7100,7500,8400,7300,6900,7500,9400,9000,6700,8100,8300,7600,9000,8300,10000,8800,9400,7200,8100,6900,8900,10000,13000,8500,9100,8500,6400,7600,6900,7100,7300,8600,9100,7000,8500,8600,8400,8000,8100,7100,7700,7500,8200,7700,8500,8600,8500,9400,10000,13000,15000,9700,8800,8600,8000,9000,7300,8600,11000,10000,9800,8900,20000,37000,39000,21000,18000,17000,19000,17000,16000,12000,15000,12000,14000,15000,18000,16000,15000,17000,16000,16000,16000,18000,19000,22000,21000,23000,20000,19000,19000,22000,21000,24000,22000,12000,9500]},{"code":"825","label":"San Diego","cx":211.7,"cy":390.7,"total":1787100,"max":55000,"peak":"2025-11-02","yoy":16.0,"vals":[9200,10000,11000,11000,11000,11000,8100,13000,12000,12000,7600,10000,11000,13000,12000,12000,9300,12000,12000,12000,11000,9900,11000,12000,13000,8300,8500,10000,7100,14000,11000,9400,10000,14000,8900,10000,8800,6400,10000,13000,9700,9900,13000,9500,13000,11000,17000,12000,16000,9400,12000,13000,9200,15000,18000,8600,13000,8200,9400,10000,13000,9000,9900,10000,14000,12000,14000,9500,8700,8200,12000,12000,11000,9400,9400,11000,12000,12000,13000,11000,15000,12000,19000,13000,9600,13000,11000,11000,11000,13000,11000,15000,15000,13000,22000,45000,55000,26000,22000,20000,22000,20000,17000,17000,15000,16000,18000,19000,17000,19000,17000,18000,15000,15000,15000,18000,24000,25000,20000,22000,24000,17000,21000,21000,18000,16000,18000,16000,12000]},{"code":"866","label":"Fresno–Visalia","cx":136.4,"cy":221.5,"total":2046800,"max":57000,"peak":"2025-10-26","yoy":-2.4,"vals":[17000,22000,18000,19000,18000,14000,16000,20000,14000,20000,18000,15000,11000,11000,16000,15000,0,16000,17000,12000,17000,14000,12000,8300,20000,20000,18000,14000,16000,13000,17000,17000,14000,8900,17000,21000,9900,12000,0,20000,14000,12000,19000,19000,19000,14000,21000,16000,15000,11000,10000,0,17000,17000,14000,16000,15000,9700,0,11000,13000,18000,0,17000,18000,14000,12000,14000,22000,20000,14000,10000,14000,15000,12000,18000,13000,12000,21000,19000,15000,26000,28000,22000,14000,14000,12000,11000,13000,18000,14000,13000,14000,19000,30000,57000,51000,23000,15000,13000,11000,19000,14000,0,17000,16000,19000,15000,17000,20000,16000,14000,19000,21000,18000,19000,16000,15000,17000,20000,15000,20000,18000,10000,11000,18000,21000,11000,14000]},{"code":"828","label":"Monterey–Salinas","cx":75.3,"cy":227.4,"total":2546000,"max":94000,"peak":"2025-11-02","yoy":32.8,"vals":[29000,0,0,26000,19000,23000,28000,22000,29000,28000,0,34000,0,24000,0,0,29000,24000,0,26000,0,0,32000,0,0,22000,0,0,31000,0,23000,40000,0,31000,25000,22000,25000,20000,0,0,28000,27000,0,29000,34000,25000,25000,29000,25000,23000,32000,0,34000,25000,27000,21000,20000,19000,0,0,19000,0,22000,0,31000,28000,0,0,20000,22000,0,0,0,26000,0,23000,21000,22000,0,30000,27000,20000,52000,0,27000,0,23000,32000,0,26000,27000,0,18000,0,50000,81000,94000,46000,46000,0,37000,28000,31000,0,35000,29000,29000,41000,0,0,0,26000,0,31000,28000,31000,33000,22000,27000,23000,35000,33000,29000,20000,31000,25000,21000,13000,20000]},{"code":"855","label":"Eureka","cx":9.8,"cy":50.5,"total":2161000,"max":56000,"peak":"2025-11-09","yoy":3.1,"vals":[28000,19000,0,18000,28000,16000,26000,23000,17000,30000,30000,25000,0,39000,18000,17000,0,21000,19000,40000,19000,27000,0,32000,23000,20000,0,0,0,19000,19000,0,0,0,0,0,0,0,24000,0,27000,20000,0,17000,26000,0,24000,0,0,0,20000,0,24000,24000,18000,23000,22000,23000,17000,0,27000,26000,0,17000,24000,0,0,25000,18000,0,19000,22000,21000,0,0,18000,0,0,0,0,21000,27000,29000,20000,28000,0,0,0,21000,0,21000,26000,30000,21000,39000,53000,48000,56000,40000,25000,30000,39000,25000,0,0,0,20000,0,24000,34000,29000,37000,18000,35000,31000,0,0,25000,37000,0,21000,21000,26000,0,22000,19000,30000,17000,17000]},{"code":"813","label":"Chico–Redding","cx":60.9,"cy":59.8,"total":803000,"max":98000,"peak":"2025-11-02","yoy":68.4,"vals":[0,0,0,43000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,42000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34000,0,0,0,0,34000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47000,37000,0,0,47000,0,0,0,47000,89000,98000,36000,0,45000,0,0,0,0,0,0,0,0,39000,0,0,0,0,37000,0,0,0,0,0,0,0,37000,53000,0,0,0,0,16000,22000]},{"code":"800","label":"Bakersfield","cx":158.1,"cy":279.2,"total":329000,"max":55000,"peak":"2025-11-02","yoy":148.1,"vals":[0,0,22000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30000,0,0,0,0,20000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29000,0,0,0,0,0,0,0,0,0,22000,0,0,0,0,0,0,0,0,0,0,0,0,25000,32000,55000,0,0,0,0,0,0,27000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20000,0,0,0,0,0,28000,8000,11000]},{"code":"868","label":"Santa Barbara","cx":138.5,"cy":319.2,"total":349000,"max":72000,"peak":"2025-10-26","yoy":82.9,"vals":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30000,0,0,0,0,0,0,0,0,0,0,0,0,0,32000,0,0,0,0,0,33000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72000,31000,0,0,0,0,0,0,0,41000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,49000,10000,16000]}],"agg":[126900,93500,91700,163400,120800,101100,114900,119300,114700,125800,96400,120100,61500,127600,84300,75500,107800,114900,81500,125100,88300,89300,91500,91900,141100,110600,65000,61600,93600,82100,142300,98400,61100,91400,96300,95300,114600,81900,78400,77000,118400,107000,72300,115100,139000,98300,148000,112800,100400,83600,119100,78900,127100,123000,124000,144100,131100,97400,56800,59600,140900,90100,70200,81600,128100,95000,63500,88100,105100,90200,81100,107100,81700,85900,58600,109700,86500,87600,70500,101400,157000,159000,184000,111700,120400,62600,134000,127000,81300,97600,163000,99000,120800,90900,294000,590000,600000,279000,205000,174000,173000,176000,151000,99000,163000,116000,141000,135000,163000,135000,117000,159000,122000,209000,155000,136000,145000,166000,181000,146000,186000,200000,218000,125000,162000,156000,246000,131000,152500],"grandTotal":16412200,"avgYoy":39.7,"peakWeek":"2025-11-02","peakIdx":96};
+const DATA = {"weeks":["2023-12-31","2024-01-07","2024-01-14","2024-01-21","2024-01-28","2024-02-04","2024-02-11","2024-02-18","2024-02-25","2024-03-03","2024-03-10","2024-03-17","2024-03-24","2024-03-31","2024-04-07","2024-04-14","2024-04-21","2024-04-28","2024-05-05","2024-05-12","2024-05-19","2024-05-26","2024-06-02","2024-06-09","2024-06-16","2024-06-23","2024-06-30","2024-07-07","2024-07-14","2024-07-21","2024-07-28","2024-08-04","2024-08-11","2024-08-18","2024-08-25","2024-09-01","2024-09-08","2024-09-15","2024-09-22","2024-09-29","2024-10-06","2024-10-13","2024-10-20","2024-10-27","2024-11-03","2024-11-10","2024-11-17","2024-11-24","2024-12-01","2024-12-08","2024-12-15","2024-12-22","2024-12-29","2025-01-05","2025-01-12","2025-01-19","2025-01-26","2025-02-02","2025-02-09","2025-02-16","2025-02-23","2025-03-02","2025-03-09","2025-03-16","2025-03-23","2025-03-30","2025-04-06","2025-04-13","2025-04-20","2025-04-27","2025-05-04","2025-05-11","2025-05-18","2025-05-25","2025-06-01","2025-06-08","2025-06-15","2025-06-22","2025-06-29","2025-07-06","2025-07-13","2025-07-20","2025-07-27","2025-08-03","2025-08-10","2025-08-17","2025-08-24","2025-08-31","2025-09-07","2025-09-14","2025-09-21","2025-09-28","2025-10-05","2025-10-12","2025-10-19","2025-10-26","2025-11-02","2025-11-09","2025-11-16","2025-11-23","2025-11-30","2025-12-07","2025-12-14","2025-12-21","2025-12-28","2026-01-04","2026-01-11","2026-01-18","2026-01-25","2026-02-01","2026-02-08","2026-02-15","2026-02-22","2026-03-01","2026-03-08","2026-03-15","2026-03-22","2026-03-29","2026-04-05","2026-04-12","2026-04-19","2026-04-26","2026-05-03","2026-05-10","2026-05-17","2026-05-24","2026-05-31","2026-06-07","2026-06-14"],"months":["2024-01-01","2024-02-01","2024-03-01","2024-04-01","2024-05-01","2024-06-01","2024-07-01","2024-08-01","2024-09-01","2024-10-01","2024-11-01","2024-12-01","2025-01-01","2025-02-01","2025-03-01","2025-04-01","2025-05-01","2025-06-01","2025-07-01","2025-08-01","2025-09-01","2025-10-01","2025-11-01","2025-12-01","2026-01-01","2026-02-01","2026-03-01","2026-04-01","2026-05-01","2026-06-01"],"dmas":[{"code":"807","label":"SF Bay Area","cx":60.0,"cy":178.1,"sparse":false,"total":541000,"max":38000,"peak":"2025-11-01","yoy":13.0,"monthly":[15000,14000,15000,14000,14000,14000,13000,12000,13000,13000,18000,15000,14000,13000,13000,12000,12000,13000,15000,19000,14000,25000,38000,27000,23000,24000,28000,31000,30000,20000],"weekly":[19000,16000,15000,17000,15000,14000,14000,13000,16000,13000,18000,15000,16000,14000,14000,12000,15000,16000,14000,12000,16000,12000,13000,16000,14000,13000,13000,13000,15000,12000,14000,11000,13000,15000,14000,14000,13000,14000,14000,14000,15000,12000,12000,14000,17000,18000,20000,19000,18000,15000,19000,16000,18000,15000,15000,14000,14000,15000,13000,12000,13000,14000,15000,12000,13000,14000,14000,12000,13000,13000,13000,12000,12000,12000,14000,14000,14000,12000,11000,16000,15000,18000,20000,32000,19000,12000,14000,12000,13000,15000,15000,17000,14000,14000,27000,55000,59000,31000,30000,29000,30000,27000,27000,26000,24000,23000,22000,24000,27000,26000,23000,23000,29000,29000,25000,27000,29000,32000,33000,34000,29000,29000,28000,31000,34000,31000,32000,16000,14000]},{"code":"862","label":"Sacramento","cx":86.8,"cy":144.0,"sparse":false,"total":591000,"max":44000,"peak":"2025-11-01","yoy":-12.2,"monthly":[20000,17000,15000,16000,17000,17000,17000,18000,20000,18000,25000,16000,18000,14000,17000,18000,16000,16000,19000,16000,17000,29000,44000,22000,20000,21000,23000,23000,23000,19000],"weekly":[18000,18000,18000,22000,22000,16000,15000,20000,19000,15000,16000,15000,16000,19000,17000,13000,17000,18000,13000,16000,18000,19000,16000,17000,21000,19000,19000,18000,16000,17000,19000,14000,17000,15000,23000,21000,18000,22000,21000,21000,18000,18000,20000,19000,21000,22000,31000,28000,17000,18000,18000,13000,16000,17000,19000,19000,18000,14000,11000,19000,15000,16000,16000,17000,19000,20000,15000,19000,15000,19000,15000,15000,16000,16000,15000,18000,18000,21000,17000,16000,19000,21000,21000,15000,14000,15000,19000,15000,16000,17000,17000,18000,20000,15000,34000,69000,70000,40000,34000,25000,24000,26000,21000,17000,16000,20000,19000,21000,21000,20000,17000,24000,25000,25000,22000,23000,24000,25000,26000,24000,22000,24000,24000,21000,25000,23000,25000,12000,17000]},{"code":"803","label":"Los Angeles","cx":180.6,"cy":334.7,"sparse":false,"total":326000,"max":25000,"peak":"2025-11-01","yoy":20.5,"monthly":[7700,7200,6700,6800,6800,7400,6800,7200,7200,8200,8700,7600,9700,7000,7600,7800,7200,8100,11000,8500,8800,17000,25000,16000,14000,16000,17000,21000,22000,14000],"weekly":[6700,8500,7700,7400,7800,7100,7800,8300,7700,7800,6800,6100,7500,7600,7300,6500,7500,7900,6500,7100,7300,7400,7500,6600,8100,8300,6500,6600,8500,7100,7300,7000,7100,7500,8400,7300,6900,7500,9400,9000,6700,8100,8300,7600,9000,8300,10000,8800,9400,7200,8100,6900,8900,10000,13000,8500,9100,8500,6400,7600,6900,7100,7300,8600,9100,7000,8500,8600,8400,8000,8100,7100,7700,7500,8200,7700,8500,8600,8500,9400,10000,13000,15000,9700,8800,8600,8000,9000,7300,8600,11000,10000,9800,8900,20000,37000,39000,21000,18000,17000,19000,17000,16000,12000,15000,12000,14000,15000,18000,16000,15000,17000,16000,16000,16000,18000,19000,22000,21000,23000,20000,19000,19000,22000,21000,24000,22000,12000,9500]},{"code":"825","label":"San Diego","cx":211.7,"cy":390.7,"sparse":false,"total":412200,"max":30000,"peak":"2025-11-01","yoy":-0.9,"monthly":[11000,12000,11000,11000,12000,10000,10000,11000,8600,11000,13000,13000,12000,9600,11000,11000,11000,11000,14000,11000,12000,21000,30000,19000,17000,17000,19000,21000,17000,15000],"weekly":[9200,10000,11000,11000,11000,11000,8100,13000,12000,12000,7600,10000,11000,13000,12000,12000,9300,12000,12000,12000,11000,9900,11000,12000,13000,8300,8500,10000,7100,14000,11000,9400,10000,14000,8900,10000,8800,6400,10000,13000,9700,9900,13000,9500,13000,11000,17000,12000,16000,9400,12000,13000,9200,15000,18000,8600,13000,8200,9400,10000,13000,9000,9900,10000,14000,12000,14000,9500,8700,8200,12000,12000,11000,9400,9400,11000,12000,12000,13000,11000,15000,12000,19000,13000,9600,13000,11000,11000,11000,13000,11000,15000,15000,13000,22000,45000,55000,26000,22000,20000,22000,20000,17000,17000,15000,16000,18000,19000,17000,19000,17000,18000,15000,15000,15000,18000,24000,25000,20000,22000,24000,17000,21000,21000,18000,16000,18000,16000,12000]},{"code":"866","label":"Fresno\u2013Visalia","cx":136.4,"cy":221.5,"sparse":false,"total":496000,"max":28000,"peak":"2025-10-01","yoy":-15.7,"monthly":[19000,17000,16000,15000,14000,15000,16000,15000,15000,16000,18000,11000,16000,12000,16000,14000,14000,14000,22000,17000,13000,28000,27000,14000,18000,18000,19000,17000,17000,13000],"weekly":[17000,22000,18000,19000,18000,14000,16000,20000,14000,20000,18000,15000,11000,11000,16000,15000,0,16000,17000,12000,17000,14000,12000,8300,20000,20000,18000,14000,16000,13000,17000,17000,14000,8900,17000,21000,9900,12000,0,20000,14000,12000,19000,19000,19000,14000,21000,16000,15000,11000,10000,0,17000,17000,14000,16000,15000,9700,0,11000,13000,18000,0,17000,18000,14000,12000,14000,22000,20000,14000,10000,14000,15000,12000,18000,13000,12000,21000,19000,15000,26000,28000,22000,14000,14000,12000,11000,13000,18000,14000,13000,14000,19000,30000,57000,51000,23000,15000,13000,11000,19000,14000,0,17000,16000,19000,15000,17000,20000,16000,14000,19000,21000,18000,19000,16000,15000,17000,20000,15000,20000,18000,10000,11000,18000,21000,11000,14000]},{"code":"828","label":"Monterey\u2013Salinas","cx":75.3,"cy":227.4,"sparse":false,"total":704000,"max":56000,"peak":"2025-11-01","yoy":-18.4,"monthly":[22000,24000,24000,19000,25000,22000,21000,16000,20000,24000,31000,24000,25000,19000,18000,19000,16000,19000,20000,19000,22000,31000,56000,26000,26000,18000,26000,24000,26000,22000],"weekly":[29000,0,0,26000,19000,23000,28000,22000,29000,28000,0,34000,0,24000,0,0,29000,24000,0,26000,0,0,32000,0,0,22000,0,0,31000,0,23000,40000,0,31000,25000,22000,25000,20000,0,0,28000,27000,0,29000,34000,25000,25000,29000,25000,23000,32000,0,34000,25000,27000,21000,20000,19000,0,0,19000,0,22000,0,31000,28000,0,0,20000,22000,0,0,0,26000,0,23000,21000,22000,0,30000,27000,20000,52000,0,27000,0,23000,32000,0,26000,27000,0,18000,0,50000,81000,94000,46000,46000,0,37000,28000,31000,0,35000,29000,29000,41000,0,0,0,26000,0,31000,28000,31000,33000,22000,27000,23000,35000,33000,29000,20000,31000,25000,21000,13000,20000]},{"code":"855","label":"Eureka","cx":9.8,"cy":50.5,"sparse":false,"total":627000,"max":40000,"peak":"2025-11-01","yoy":-4.1,"monthly":[21000,18000,21000,18000,19000,20000,17000,15000,14000,19000,23000,19000,22000,21000,18000,17000,18000,19000,18000,17000,16000,34000,40000,22000,23000,26000,25000,22000,25000,20000],"weekly":[28000,19000,0,18000,28000,16000,26000,23000,17000,30000,30000,25000,0,39000,18000,17000,0,21000,19000,40000,19000,27000,0,32000,23000,20000,0,0,0,19000,19000,0,0,0,0,0,0,0,24000,0,27000,20000,0,17000,26000,0,24000,0,0,0,20000,0,24000,24000,18000,23000,22000,23000,17000,0,27000,26000,0,17000,24000,0,0,25000,18000,0,19000,22000,21000,0,0,18000,0,0,0,0,21000,27000,29000,20000,28000,0,0,0,21000,0,21000,26000,30000,21000,39000,53000,48000,56000,40000,25000,30000,39000,25000,0,0,0,20000,0,24000,34000,29000,37000,18000,35000,31000,0,0,25000,37000,0,21000,21000,26000,0,22000,19000,30000,17000,17000]},{"code":"813","label":"Chico\u2013Redding","cx":60.9,"cy":59.8,"sparse":true,"total":676000,"max":49000,"peak":"2025-11-01","yoy":-33.7,"monthly":[17000,21000,13000,24000,15000,26000,16000,17000,24000,18000,33000,16000,31000,23000,20000,21000,17000,13000,23000,25000,26000,47000,49000,17000,27000,16000,23000,20000,25000,13000],"weekly":[0,0,0,43000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,42000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34000,0,0,0,0,34000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47000,37000,0,0,47000,0,0,0,47000,89000,98000,36000,0,45000,0,0,0,0,0,0,0,0,39000,0,0,0,0,37000,0,0,0,0,0,0,0,37000,53000,0,0,0,0,16000,22000]},{"code":"800","label":"Bakersfield","cx":158.1,"cy":279.2,"sparse":true,"total":303500,"max":25000,"peak":"2025-11-01","yoy":-23.2,"monthly":[13000,9400,6400,9400,10000,7200,8200,9200,12000,4700,10000,9500,6000,7800,9700,9100,7800,9100,11000,11000,11000,12000,25000,12000,8700,12000,9300,15000,12000,6000],"weekly":[0,0,22000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30000,0,0,0,0,20000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29000,0,0,0,0,0,0,0,0,0,22000,0,0,0,0,0,0,0,0,0,0,0,0,25000,32000,55000,0,0,0,0,0,0,27000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20000,0,0,0,0,0,28000,8000,11000]},{"code":"868","label":"Santa Barbara","cx":138.5,"cy":319.2,"sparse":true,"total":352100,"max":31000,"peak":"2025-10-01","yoy":2.1,"monthly":[10000,8200,0,11000,12000,8500,0,12000,8800,7500,13000,9400,12000,15000,11000,19000,11000,8300,14000,0,16000,31000,18000,7800,16000,17000,15000,13000,20000,7600],"weekly":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,30000,0,0,0,0,0,0,0,0,0,0,0,0,0,32000,0,0,0,0,0,33000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,35000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72000,31000,0,0,0,0,0,0,0,41000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,49000,10000,16000]}],"weeklyAgg":[126900,93500,91700,163400,120800,101100,114900,119300,114700,125800,96400,120100,61500,127600,84300,75500,107800,114900,81500,125100,88300,89300,91500,91900,141100,110600,65000,61600,93600,82100,142300,98400,61100,91400,96300,95300,114600,81900,78400,77000,118400,107000,72300,115100,139000,98300,148000,112800,100400,83600,119100,78900,127100,123000,124000,144100,131100,97400,56800,59600,140900,90100,70200,81600,128100,95000,63500,88100,105100,90200,81100,107100,81700,85900,58600,109700,86500,87600,70500,101400,157000,159000,184000,111700,120400,62600,134000,127000,81300,97600,163000,99000,120800,90900,294000,590000,600000,279000,205000,174000,173000,176000,151000,99000,163000,116000,141000,135000,163000,135000,117000,159000,122000,209000,155000,136000,145000,166000,181000,146000,186000,200000,218000,125000,162000,156000,246000,131000,152500],"monthlyAgg":[155700,147800,128100,144200,144800,147100,125000,132400,142600,139400,192700,140500,165700,141400,141300,147900,130000,130500,167000,143500,155800,275000,352000,182800,192700,185000,204300,207000,217000,149600],"grandTotal":5028800,"avgYoy":-7.3,"peakWeek":"2025-11-02","peakWeekIdx":96,"peakMonth":"2025-11-01","peakMonthIdx":22};
 
 const ACCENT  = '#E8622A';
 const OCEAN   = '#1A6B9A';
@@ -493,8 +492,22 @@ const TEXT    = '#0D1B2A';
 const MUTED   = '#7089A3';
 
 let active     = null;
-let windowSize = 26;
 let smoothOn   = true;
+let resMode    = 'monthly'; // 'monthly' | 'weekly'
+
+// Window options per resolution — values are data-point counts
+const WINDOWS = {
+  monthly: [ {label:'3M', n:3}, {label:'6M', n:6}, {label:'12M', n:12}, {label:'All', n:0} ],
+  weekly:  [ {label:'4W', n:4}, {label:'13W', n:13}, {label:'26W', n:26}, {label:'All', n:0} ],
+};
+// Default window index (3rd option = 6M monthly / 26W weekly)
+let windowSize = 6; // starts in monthly mode so 6 = 6 months
+
+function periods()   { return resMode === 'monthly' ? DATA.months   : DATA.weeks; }
+function agg()       { return resMode === 'monthly' ? DATA.monthlyAgg : DATA.weeklyAgg; }
+function dmaVals(d)  { return resMode === 'monthly' ? d.monthly     : d.weekly; }
+function peakIdx()   { return resMode === 'monthly' ? DATA.peakMonthIdx : DATA.peakWeekIdx; }
+function peakLabel() { return resMode === 'monthly' ? DATA.peakMonth    : DATA.peakWeek; }
 
 // ── Smoothing: 3-week rolling average ────────────────────────
 function smooth(vals) {
@@ -510,6 +523,8 @@ function smooth(vals) {
 // ── Window slice + YoY reference ─────────────────────────────
 // Returns { current: number[], prior: number[]|null, startIdx: number }
 function getWindow(vals) {
+  // prior-year offset: 52 weeks or 12 months
+  const pyOffset = resMode === 'monthly' ? 12 : 52;
   if (windowSize === 0) {
     const v = smoothOn ? smooth(vals) : vals;
     return { current: v, prior: null, startIdx: 0 };
@@ -517,8 +532,7 @@ function getWindow(vals) {
   const n     = vals.length;
   const start = Math.max(0, n - windowSize);
   const cur   = vals.slice(start, n);
-  // Prior year = same number of weeks, offset by 52
-  const pyStart = Math.max(0, start - 52);
+  const pyStart = Math.max(0, start - pyOffset);
   const pyEnd   = Math.min(n, pyStart + windowSize);
   const py      = vals.slice(pyStart, pyEnd);
   return {
@@ -544,111 +558,108 @@ function fmtDate(s) {
 // ── KPI bar ──────────────────────────────────────────────────
 document.getElementById('kpiTotal').textContent  = fmt(DATA.grandTotal);
 document.getElementById('kpiYoy').textContent    = fmtYoy(DATA.avgYoy);
-document.getElementById('kpiPeak').textContent   = fmtDate(DATA.peakWeek);
+document.getElementById('kpiPeak').textContent   = fmtDate(DATA.peakMonth);
 document.getElementById('footDates').textContent =
-  DATA.weeks[0] + ' → ' + DATA.weeks[DATA.weeks.length - 1];
+  DATA.months[0] + ' → ' + DATA.months[DATA.months.length - 1];
 
 // ── Hero aggregate chart ──────────────────────────────────────
-(function () {
-  const canvas = document.getElementById('heroCanvas');
-  const axisEl = document.getElementById('chartAxis');
-  const vals   = DATA.agg;
-  const n      = vals.length;
-  const max    = Math.max(...vals);
+const heroCanvas = document.getElementById('heroCanvas');
+const heroAxis   = document.getElementById('chartAxis');
 
-  const axisDates = [];
+function drawHero() {
+  const vals = agg();
+  const ps   = periods();
+  const n    = vals.length;
+  const max  = Math.max(...vals);
+
   const step = Math.floor(n / 5);
+  const axisDates = [];
   for (let i = 0; i <= 5; i++) {
     const idx = Math.min(i * step, n - 1);
-    const d   = new Date(DATA.weeks[idx] + 'T00:00:00Z');
-    axisDates.push(d.toLocaleDateString('en-US', { month: 'short', year: '2-digit', timeZone: 'UTC' }));
+    axisDates.push(shortDate(ps[idx]));
   }
-  axisEl.innerHTML = axisDates.map(s => `<span>${s}</span>`).join('');
+  heroAxis.innerHTML = axisDates.map(s => `<span>${s}</span>`).join('');
 
-  function draw() {
-    const dpr = window.devicePixelRatio || 1;
-    const W   = canvas.offsetWidth  * dpr;
-    const H   = canvas.offsetHeight * dpr;
-    if (W === 0) return;
-    canvas.width  = W;
-    canvas.height = H;
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, W, H);
+  const dpr = window.devicePixelRatio || 1;
+  const W   = heroCanvas.offsetWidth  * dpr;
+  const H   = heroCanvas.offsetHeight * dpr;
+  if (W === 0) return;
+  heroCanvas.width  = W;
+  heroCanvas.height = H;
+  const ctx = heroCanvas.getContext('2d');
+  ctx.clearRect(0, 0, W, H);
 
-    const padL = 0, padR = 0, padT = 12 * dpr, padB = 4 * dpr;
-    const uw = (W - padL - padR) / (n - 1);
-    const uh = H - padT - padB;
+  const padL = 0, padR = 0, padT = 12 * dpr, padB = 4 * dpr;
+  const uw = (W - padL - padR) / (n - 1);
+  const uh = H - padT - padB;
+  const px = i => padL + i * uw;
+  const py = v => H - padB - (v / max) * uh;
 
-    const px = i => padL + i * uw;
-    const py = v => H - padB - (v / max) * uh;
-
-    ctx.strokeStyle = BORDER;
-    ctx.lineWidth   = dpr;
-    [0.25, 0.5, 0.75, 1.0].forEach(f => {
-      const y = H - padB - f * uh;
-      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
-    });
-
-    const sv = smooth(vals);
-
-    const grad = ctx.createLinearGradient(0, 0, 0, H);
-    grad.addColorStop(0, 'rgba(232,98,42,.22)');
-    grad.addColorStop(1, 'rgba(232,98,42,0)');
-
-    ctx.beginPath();
-    ctx.moveTo(px(0), H - padB);
-    for (let i = 0; i < n; i++) ctx.lineTo(px(i), py(sv[i]));
-    ctx.lineTo(px(n - 1), H - padB);
-    ctx.closePath();
-    ctx.fillStyle = grad;
-    ctx.fill();
-
-    ctx.beginPath();
-    for (let i = 0; i < n; i++) {
-      if (i === 0) ctx.moveTo(px(i), py(sv[i]));
-      else         ctx.lineTo(px(i), py(sv[i]));
-    }
-    ctx.strokeStyle = ACCENT;
-    ctx.lineWidth   = 1.5 * dpr;
-    ctx.lineJoin    = 'round';
-    ctx.stroke();
-
-    const pi  = DATA.peakIdx;
-    const ppx = px(pi);
-    const ppy = py(sv[pi]);
-    ctx.beginPath();
-    ctx.arc(ppx, ppy, 4 * dpr, 0, Math.PI * 2);
-    ctx.fillStyle = ACCENT;
-    ctx.fill();
-
-    ctx.font      = `${600} ${10 * dpr}px system-ui, sans-serif`;
-    ctx.fillStyle = TEXT;
-    ctx.textAlign = ppx > W * 0.7 ? 'right' : 'left';
-    const lx = ppx > W * 0.7 ? ppx - 8 * dpr : ppx + 8 * dpr;
-    ctx.fillText('PEAK · ' + fmtDate(DATA.peakWeek).toUpperCase(), lx, ppy - 6 * dpr);
-  }
-
-  draw();
-  window.addEventListener('resize', draw);
-
-  canvas.addEventListener('mousemove', e => {
-    const rect   = canvas.getBoundingClientRect();
-    const xRatio = (e.clientX - rect.left) / rect.width;
-    const idx    = Math.max(0, Math.min(n - 1, Math.round(xRatio * (n - 1))));
-    const week   = shortDate(DATA.weeks[idx]);
-    const val    = DATA.agg[idx];
-    sparkTip.innerHTML = `<strong style="color:#fff">Statewide</strong> · ${week}<br><span style="color:${ACCENT}">●</span> ${fmt(val)} searches`;
-    const tw = 220, th = 48;
-    let lx = e.clientX + 14;
-    let ly = e.clientY - 14;
-    if (lx + tw > window.innerWidth)  lx = e.clientX - tw - 14;
-    if (ly + th > window.innerHeight) ly = e.clientY - th - 8;
-    sparkTip.style.left = lx + 'px';
-    sparkTip.style.top  = ly + 'px';
-    sparkTip.classList.add('show');
+  ctx.strokeStyle = BORDER;
+  ctx.lineWidth   = dpr;
+  [0.25, 0.5, 0.75, 1.0].forEach(f => {
+    const y = H - padB - f * uh;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
   });
-  canvas.addEventListener('mouseleave', () => sparkTip.classList.remove('show'));
-})();
+
+  const sv = smooth(vals);
+
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, 'rgba(232,98,42,.22)');
+  grad.addColorStop(1, 'rgba(232,98,42,0)');
+  ctx.beginPath();
+  ctx.moveTo(px(0), H - padB);
+  for (let i = 0; i < n; i++) ctx.lineTo(px(i), py(sv[i]));
+  ctx.lineTo(px(n - 1), H - padB);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    if (i === 0) ctx.moveTo(px(i), py(sv[i]));
+    else         ctx.lineTo(px(i), py(sv[i]));
+  }
+  ctx.strokeStyle = ACCENT;
+  ctx.lineWidth   = 1.5 * dpr;
+  ctx.lineJoin    = 'round';
+  ctx.stroke();
+
+  const pi  = peakIdx();
+  const ppx = px(pi);
+  const ppy = py(sv[pi]);
+  ctx.beginPath();
+  ctx.arc(ppx, ppy, 4 * dpr, 0, Math.PI * 2);
+  ctx.fillStyle = ACCENT;
+  ctx.fill();
+
+  ctx.font      = `600 ${10 * dpr}px system-ui, sans-serif`;
+  ctx.fillStyle = TEXT;
+  ctx.textAlign = ppx > W * 0.7 ? 'right' : 'left';
+  const lx = ppx > W * 0.7 ? ppx - 8 * dpr : ppx + 8 * dpr;
+  ctx.fillText('PEAK · ' + fmtDate(peakLabel()).toUpperCase(), lx, ppy - 6 * dpr);
+}
+
+drawHero();
+window.addEventListener('resize', drawHero);
+
+heroCanvas.addEventListener('mousemove', e => {
+  const vals   = agg();
+  const ps     = periods();
+  const n      = vals.length;
+  const rect   = heroCanvas.getBoundingClientRect();
+  const xRatio = (e.clientX - rect.left) / rect.width;
+  const idx    = Math.max(0, Math.min(n - 1, Math.round(xRatio * (n - 1))));
+  sparkTip.innerHTML = `<strong style="color:#fff">Statewide</strong> · ${shortDate(ps[idx])}<br><span style="color:${ACCENT}">●</span> ${fmt(vals[idx])} searches`;
+  const tw = 220, th = 48;
+  let lx = e.clientX + 14, ly = e.clientY - 14;
+  if (lx + tw > window.innerWidth)  lx = e.clientX - tw - 14;
+  if (ly + th > window.innerHeight) ly = e.clientY - th - 8;
+  sparkTip.style.left = lx + 'px';
+  sparkTip.style.top  = ly + 'px';
+  sparkTip.classList.add('show');
+});
+heroCanvas.addEventListener('mouseleave', () => sparkTip.classList.remove('show'));
 
 // ── California map ────────────────────────────────────────────
 const maxTotal = Math.max(...DATA.dmas.map(d => d.total));
@@ -808,20 +819,20 @@ function drawSparkline(canvas, rawVals, isActive, startIdx) {
 
 // ── Compute window-aware YoY label ───────────────────────────
 function windowYoyLabel(d) {
-  if (windowSize === 0) {
-    const yoyClass = d.yoy >= 0 ? 'up' : 'down';
-    return `<span class="val ${yoyClass}">${fmtYoy(d.yoy)}</span> vs prior 13 wks`;
-  }
-  const n  = d.vals.length;
-  const start = Math.max(0, n - windowSize);
-  const cur   = d.vals.slice(start, n).reduce((a, b) => a + b, 0);
-  const pyStart = Math.max(0, start - 52);
-  const pyEnd   = Math.min(n, pyStart + windowSize);
-  const py    = d.vals.slice(pyStart, pyEnd).reduce((a, b) => a + b, 0);
+  const vals     = dmaVals(d);
+  const pyOffset = resMode === 'monthly' ? 12 : 52;
+  const wSize    = windowSize || Math.min(pyOffset, vals.length);
+  const n        = vals.length;
+  const start    = Math.max(0, n - wSize);
+  const cur      = vals.slice(start, n).reduce((a, b) => a + b, 0);
+  const pyStart  = Math.max(0, start - pyOffset);
+  const pyEnd    = Math.min(n, pyStart + wSize);
+  const py       = vals.slice(pyStart, pyEnd).reduce((a, b) => a + b, 0);
   if (py === 0) return `<span class="val">${fmt(cur)}</span> this window`;
   const chg = (cur - py) / py * 100;
   const yoyClass = chg >= 0 ? 'up' : 'down';
-  return `<span class="val ${yoyClass}">${fmtYoy(chg)}</span> vs prior year`;
+  const vsLabel  = windowSize === 0 ? 'vs prior year' : 'vs prior year';
+  return `<span class="val ${yoyClass}">${fmtYoy(chg)}</span> ${vsLabel}`;
 }
 
 // ── Date axis labels for a window ────────────────────────────
@@ -840,25 +851,27 @@ function attachTooltip(canvas, dmaIndex) {
   const d = DATA.dmas[dmaIndex];
 
   canvas.addEventListener('mousemove', e => {
+    const ps      = periods();
+    const pyOffset = resMode === 'monthly' ? 12 : 52;
     const rect    = canvas.getBoundingClientRect();
     const xRatio  = (e.clientX - rect.left) / rect.width;
-    const { current, prior, startIdx } = getWindow(d.vals);
+    const { current, prior } = getWindow(dmaVals(d));
     const n       = current.length;
     const idx     = Math.max(0, Math.min(n - 1, Math.round(xRatio * (n - 1))));
-    const absIdx  = (windowSize > 0 ? Math.max(0, DATA.weeks.length - windowSize) : 0) + idx;
-    const weekStr = DATA.weeks[absIdx] ? shortDate(DATA.weeks[absIdx]) : '';
+    const absIdx  = (windowSize > 0 ? Math.max(0, ps.length - windowSize) : 0) + idx;
+    const periodStr = ps[absIdx] ? shortDate(ps[absIdx]) : '';
     const curVal  = current[idx];
 
-    let html = `<strong style="color:#fff">${d.label}</strong> · ${weekStr}<br>`;
+    let html = `<strong style="color:#fff">${d.label}</strong> · ${periodStr}<br>`;
     html += `<span style="color:${ACCENT}">●</span> ${fmt(curVal)} searches`;
 
     if (prior && prior.length > 0) {
-      const pyIdx   = Math.min(idx, prior.length - 1);
-      const pyAbsIdx = Math.max(0, DATA.weeks.length - windowSize - 52) + pyIdx;
-      const pyWeek  = DATA.weeks[pyAbsIdx] ? shortDate(DATA.weeks[pyAbsIdx]) : 'prior year';
-      const pyVal   = prior[pyIdx];
+      const pyIdx    = Math.min(idx, prior.length - 1);
+      const pyAbsIdx = Math.max(0, ps.length - windowSize - pyOffset) + pyIdx;
+      const pyPeriod = ps[pyAbsIdx] ? shortDate(ps[pyAbsIdx]) : 'prior year';
+      const pyVal    = prior[pyIdx];
       if (pyVal > 0) {
-        html += `<br><span style="color:${OCEAN}">–– </span>${fmt(pyVal)} searches (${pyWeek})`;
+        html += `<br><span style="color:${OCEAN}">–– </span>${fmt(pyVal)} searches (${pyPeriod})`;
       }
     }
 
@@ -891,8 +904,11 @@ function buildGrid() {
     const isActive = active === i;
     const card     = document.createElement('div');
     card.className = 'dma-card' + (isActive ? ' active' : '');
+    const sparseTag = (d.sparse && resMode === 'weekly')
+      ? `<span style="margin-left:6px;font-size:9px;font-weight:600;letter-spacing:.05em;color:var(--ocean);text-transform:uppercase;vertical-align:middle;">sparse</span>`
+      : '';
     card.innerHTML = `
-      <div class="card-name">${d.label}</div>
+      <div class="card-name">${d.label}${sparseTag}</div>
       <div class="card-meta">${fmt(d.total)} total searches</div>
       <canvas class="card-canvas"></canvas>
       <div class="card-axis"></div>
@@ -903,27 +919,54 @@ function buildGrid() {
   });
 
   requestAnimationFrame(() => {
+    const ps = periods();
+    const n  = ps.length;
     document.querySelectorAll('.dma-card').forEach((card, i) => {
       const canvas = card.querySelector('canvas');
-      const { startIdx } = getWindow(DATA.dmas[i].vals);
-      drawSparkline(canvas, DATA.dmas[i].vals, active === i, startIdx);
+      const vals   = dmaVals(DATA.dmas[i]);
+      drawSparkline(canvas, vals, active === i);
       attachTooltip(canvas, i);
 
-      // date axis
-      const axis = card.querySelector('.card-axis');
-      const n    = DATA.weeks.length;
+      const axis   = card.querySelector('.card-axis');
       const wStart = windowSize > 0 ? Math.max(0, n - windowSize) : 0;
-      axis.innerHTML = `<span>${shortDate(DATA.weeks[wStart])}</span><span>${shortDate(DATA.weeks[n - 1])}</span>`;
+      axis.innerHTML = `<span>${shortDate(ps[wStart])}</span><span>${shortDate(ps[n - 1])}</span>`;
     });
   });
 }
 
 // ── Controls ──────────────────────────────────────────────────
+function buildWindowPills() {
+  const container = document.getElementById('windowPills');
+  const options   = WINDOWS[resMode];
+  container.innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'pill' + (opt.n === windowSize ? ' active' : '');
+    btn.dataset.w = opt.n;
+    btn.textContent = opt.label;
+    container.appendChild(btn);
+  });
+  document.getElementById('yoyLegend').classList.toggle('show', windowSize > 0);
+}
+
+document.getElementById('resPills').addEventListener('click', e => {
+  const btn = e.target.closest('.pill');
+  if (!btn) return;
+  resMode = btn.dataset.res;
+  document.querySelectorAll('#resPills .pill').forEach(b => b.classList.toggle('active', b === btn));
+  // Map to equivalent calendar window in new resolution
+  // Monthly default: 6M; Weekly default: 26W — both ≈ 6 months
+  windowSize = resMode === 'monthly' ? 6 : 26;
+  buildWindowPills();
+  buildGrid();
+  drawHero();
+});
+
 document.getElementById('windowPills').addEventListener('click', e => {
   const btn = e.target.closest('.pill');
   if (!btn) return;
   windowSize = parseInt(btn.dataset.w, 10);
-  document.querySelectorAll('.pill').forEach(b => b.classList.toggle('active', b === btn));
+  document.querySelectorAll('#windowPills .pill').forEach(b => b.classList.toggle('active', b === btn));
   document.getElementById('yoyLegend').classList.toggle('show', windowSize > 0);
   buildGrid();
 });
@@ -949,7 +992,7 @@ function switchTab(target) {
   if (target === 'markets') {
     requestAnimationFrame(() => {
       document.querySelectorAll('.dma-card').forEach((card, i) => {
-        drawSparkline(card.querySelector('canvas'), DATA.dmas[i].vals, active === i);
+        drawSparkline(card.querySelector('canvas'), dmaVals(DATA.dmas[i]), active === i);
       });
     });
   }
@@ -962,6 +1005,7 @@ document.querySelector('.tab-nav').addEventListener('click', e => {
 });
 
 // ── Init ──────────────────────────────────────────────────────
+buildWindowPills();
 buildMap();
 buildRank();
 buildGrid();
@@ -970,8 +1014,9 @@ let resizeT;
 window.addEventListener('resize', () => {
   clearTimeout(resizeT);
   resizeT = setTimeout(() => {
+    drawHero();
     document.querySelectorAll('.dma-card').forEach((card, i) => {
-      drawSparkline(card.querySelector('canvas'), DATA.dmas[i].vals, active === i);
+      drawSparkline(card.querySelector('canvas'), dmaVals(DATA.dmas[i]), active === i);
     });
   }, 120);
 });
