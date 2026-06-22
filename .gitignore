@@ -1,0 +1,21 @@
+# Credentials — never commit
+.env
+token.json
+auth_state.json
+hungertrends-*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+
+# Intermediate build artifacts
+embedded_data.json
+
+# Editor
+.vscode/
+.idea/
+*.swp
